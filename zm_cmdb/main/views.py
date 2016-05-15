@@ -12,3 +12,13 @@ def import_data(request):
 			# print row[0]
 			Host.objects.create_host(row[0], row[2], row[1])
 	return HttpResponse('ok')
+
+def reg(request):
+	return render(request, 'reg.html')
+
+def index(request):
+	# return HttpResponse('Hello world!')
+	return render(request, 'index.html')
+
+def list_host(request):
+	return render(request, 'list.html')
