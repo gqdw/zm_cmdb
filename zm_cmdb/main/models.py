@@ -16,6 +16,9 @@ class Host(models.Model):
 	eth0 = models.GenericIPAddressField(unique=True, blank=True, null=True)
 	# eth0 = models.GenericIPAddressField(unique=True)
 	eth1 = models.GenericIPAddressField(unique=True, blank=True, null=True)
+
+	def __unicode__(self):
+		return self.hostname
 	
 	objects = HostManager()
 
