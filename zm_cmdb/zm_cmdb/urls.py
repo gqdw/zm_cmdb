@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-# from main import views
+from main import views as main_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,4 +23,5 @@ urlpatterns = [
 #    url(r'^list/', 'main.views.list_host'),
     # url(r'^reg/', 'main.views.reg'),
     url(r'^main/', include('main.urls', namespace="main")),
+    url(r'^$', main_views.index)
 ]
