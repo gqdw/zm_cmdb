@@ -21,4 +21,5 @@ def index(request):
 	return render(request, 'index.html')
 
 def list_host(request):
-	return render(request, 'list.html')
+	hosts = Host.objects.all()
+	return render(request, 'list.html', {'hosts':hosts} )
