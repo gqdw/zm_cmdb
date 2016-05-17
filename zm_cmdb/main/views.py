@@ -23,3 +23,16 @@ def index(request):
 def list_host(request):
 	hosts = Host.objects.all()
 	return render(request, 'list.html', {'hosts':hosts} )
+
+def output_data(request):
+	response = HttpResponse(content_type='text/csv')
+	response['Content-Disposition']  = 'attachment; filename="somefilename.csv"'
+	writer = csv.writer(response)
+	for h in Host.objects.all():
+		alist = []
+		alist.append(h.hostname)
+		alist.append(h.eth0)
+		alist.append(h.eth1)
+		writer.writerow(alist)
+#	writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
+	return response
