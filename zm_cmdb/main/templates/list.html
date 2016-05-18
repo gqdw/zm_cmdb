@@ -10,10 +10,13 @@
   <li role="presentation"><a href="#">Messages</a></li>
 </ul>
 <body>
-<h1>Host List In CMDB</h1>
 
-<h3>there are {{ hosts|length }} hosts in cmdb
-<table border="1">
+<div class="panel panel-default">
+<div class="panel-heading">Host List</div>
+<div class="panel-body">
+	<p>there are {{ hosts|length }} hosts in cmdb </p>
+</div>
+<table border="1" class="table">
 {% for host in hosts %}
         <tr>
                 <th>{{ host.hostname }} </th>
