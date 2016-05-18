@@ -3,6 +3,13 @@
 
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
+<html>
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/">Home</a></li>
+  <li role="presentation" class="active"><a href="/main/list">机器列表</a></li>
+  <li role="presentation"><a href="#">Messages</a></li>
+</ul>
+<body>
 <h1>Host List In CMDB</h1>
 
 <h3>there are {{ hosts|length }} hosts in cmdb
@@ -15,3 +22,6 @@
         </tr>
 {% endfor %}
 </table>
+
+</body>
+</html>
