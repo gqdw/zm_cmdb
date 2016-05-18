@@ -26,8 +26,9 @@ def list_host(request):
 
 def output_data(request):
 	response = HttpResponse(content_type='text/csv')
-	response['Content-Disposition']  = 'attachment; filename="somefilename.csv"'
+	response['Content-Disposition']  = 'attachment; filename="zm_hosts.csv"'
 	writer = csv.writer(response)
+	writer.writerow(['hostname', 'eth0', 'eth1'])
 	for h in Host.objects.all():
 		alist = []
 		alist.append(h.hostname)
