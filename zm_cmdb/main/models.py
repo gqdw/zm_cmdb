@@ -11,7 +11,7 @@ class HostManager(models.Manager):
 
 
 class Host(models.Model):
-	hostname = models.CharField(max_length=30)
+	hostname = models.CharField(unique=True, max_length=30)
 	# hostname = models.CharField(max_length=30, unique=True)
 	eth0 = models.GenericIPAddressField(unique=True, blank=True, null=True)
 	# eth0 = models.GenericIPAddressField(unique=True)
