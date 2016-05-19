@@ -17,6 +17,11 @@
 	<p>there are {{ hosts|length }} hosts in cmdb </p>
 </div>
 <table border="1" class="table">
+<tr>
+<th>hostname</th>
+<th>eth0</th>
+<th>eth1</th>
+</tr>
 {% for host in hosts %}
         <tr>
                 <th>{{ host.hostname }} </th>
