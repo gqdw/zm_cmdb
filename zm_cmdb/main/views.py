@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Host
 import csv
 from .zabbix import Zabbix
@@ -45,11 +45,12 @@ def ismonitor(request):
 	Z.get_hostip()
 	hosts = Host.objects.all()
 	for h in hosts:
-		print h.eth0
+	#	print h.eth0
 		if h.eth0 in Z.hosts:
 			h.ismonitor = True
 			h.save()
 		else:
 			h.ismonitor = False
-
-	return HttpResponse('zabbix status is ok')
+#	print request.path
+	return HttpResponseRedirect('/main/list/')
+	# return HttpResponse('zabbix status is ok')
