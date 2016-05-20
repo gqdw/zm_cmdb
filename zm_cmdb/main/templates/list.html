@@ -16,18 +16,26 @@
 <div class="panel-body">
 	<p>there are {{ hosts|length }} hosts in cmdb </p>
 </div>
-<table border="1" class="table-hover">
+<table border="1" class="table table-condensed">
 <tr>
 <th>hostname</th>
 <th>eth0</th>
 <th>eth1</th>
 </tr>
 {% for host in hosts %}
+{% if host.ismonitor %}
+        <tr class="success">
+                <th>{{ host.hostname }} </th>
+                <th>{{ host.eth0 }} </th>
+                <th>{{ host.eth1 }} </th>
+        </tr>
+{% else %}
         <tr>
                 <th>{{ host.hostname }} </th>
                 <th>{{ host.eth0 }} </th>
                 <th>{{ host.eth1 }} </th>
         </tr>
+{% endif %}
 {% endfor %}
 </table>
 
