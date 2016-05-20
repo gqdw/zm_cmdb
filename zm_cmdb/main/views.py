@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Host
 import csv
 from .zabbix import Zabbix
+from datetime import datetime
 
 # Create your views here.
 
@@ -26,8 +27,10 @@ def list_host(request):
 	return render(request, 'list.html', {'hosts':hosts} )
 
 def output_data(request):
+	today = datetime.today()
+	filename = datetime.strftime(today,'%y%m%d')
 	response = HttpResponse(content_type='text/csv')
-	response['Content-Disposition']  = 'attachment; filename="zm_hosts.csv"'
+	response['Content-Disposition']  = 'attachment; filename="zm_hosts-%s.csv"' % (filename)
 	writer = csv.writer(response)
 	writer.writerow(['hostname', 'eth0', 'eth1'])
 	for h in Host.objects.all():
