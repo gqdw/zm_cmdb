@@ -13,6 +13,7 @@ class Zabbix():
 		self.auth = ''
 		self.z_url = 'https://zabbix.zhai.me/api_jsonrpc.php'
 		self.times = 1
+		self.hosts = []
 
 	def commit(self, data):
 		res = requests.post(self.z_url, json=data).json()
@@ -46,12 +47,13 @@ class Zabbix():
 		res = self.commit(a_data)['result']
 		# print res.json()
 		for r in res:
-			print r['ip']
+			self.hosts.append(r['ip'])
 
 def main():
 	Z = Zabbix()
 	Z.get_auth()
 	Z.get_hostip()
+	print Z.hosts
 
 
 if __name__ == '__main__':
