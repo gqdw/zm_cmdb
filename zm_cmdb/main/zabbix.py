@@ -23,7 +23,7 @@ class Zabbix():
 
 	def get_auth(self):
 		config = ConfigParser.ConfigParser()
-		config.read('zabbix.cfg')
+		config.read(os.path.expanduser('~/zabbix.cfg'))
 		user = config.get('main', 'user')
 		password = config.get('main', 'password')
 		a_data = {"jsonrpc":"2.0","method":"user.login","params":{"user":user, "password":password } ,"id":1}
