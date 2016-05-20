@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Host
 import csv
+from .zabbix import Zabbix
 
 # Create your views here.
 
@@ -37,3 +38,18 @@ def output_data(request):
 		writer.writerow(alist)
 #	writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
 	return response
+
+def ismonitor(request):
+	Z = Zabbix()
+	Z.get_auth()
+	Z.get_hostip()
+	hosts = Host.objects.all()
+	for h in hosts:
+		print h.eth0
+		if h.eth0 in Z.hosts:
+			h.ismonitor = True
+			h.save()
+		else:
+			h.ismonitor = False
+
+	return HttpResponse('zabbix status is ok')
