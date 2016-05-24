@@ -66,5 +66,5 @@ def apply(request):
 		if form.is_valid():
 			return HttpResponse('ok')
 	else:
-		f = ApplyForm()
-		return render(request, 'apply.html', {'form':f})
+		form = ApplyForm()
+	return render(request, 'apply.html', {'form':form})

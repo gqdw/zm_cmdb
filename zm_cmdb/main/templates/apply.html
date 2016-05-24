@@ -13,6 +13,12 @@
 <div class="container">
 
 <div class="panel-heading">申请机器</div>
+
+ {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
     <form action="" method="post" >
         <table class="table table-condensed">
             {{ form.as_table }}
