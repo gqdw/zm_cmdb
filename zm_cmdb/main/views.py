@@ -1,9 +1,11 @@
+# coding: utf-8
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Host
 import csv
 from .zabbix import Zabbix
 from datetime import datetime
+from .forms import ApplyForm
 
 # Create your views here.
 
@@ -59,4 +61,5 @@ def ismonitor(request):
 	# return HttpResponse('zabbix status is ok')
 
 def apply(request):
-	return render(request, 'apply.html')
+	f = ApplyForm()
+	return render(request, 'apply.html', {'form':f})
