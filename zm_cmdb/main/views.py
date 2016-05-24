@@ -57,3 +57,6 @@ def ismonitor(request):
 #	print request.path
 	return HttpResponseRedirect('/main/list/')
 	# return HttpResponse('zabbix status is ok')
+
+def apply(request):
+	return render(request, 'apply.html')
