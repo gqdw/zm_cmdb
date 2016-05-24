@@ -61,5 +61,10 @@ def ismonitor(request):
 	# return HttpResponse('zabbix status is ok')
 
 def apply(request):
-	f = ApplyForm()
-	return render(request, 'apply.html', {'form':f})
+	if request.method == 'POST':
+		form = ApplyForm(request.POST)
+		if form.is_valid():
+			return HttpResponse('ok')
+	else:
+		f = ApplyForm()
+		return render(request, 'apply.html', {'form':f})
