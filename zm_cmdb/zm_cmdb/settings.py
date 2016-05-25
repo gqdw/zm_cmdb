@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import ConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -122,3 +123,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = './static'
+
+# mail
+config = ConfigParser.ConfigParser()
+config.read(os.path.expanduser('~/mail.cfg'))
+EMAIL_HOST = config.get('mail', 'host')
+EMAIL_HOST_USER = config.get('mail', 'user')
+EMAIL_HOST_PASSWORD = config.get('mail', 'password')
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+
