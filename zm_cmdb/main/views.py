@@ -5,8 +5,9 @@ from .models import Host
 import csv
 from .zabbix import Zabbix
 from datetime import datetime
-from .forms import ApplyForm
+from .forms import ApplyForm, LoginForm
 from django.core.mail import send_mail
+from django.contrib.auth import authenticate
 
 # Create your views here.
 
@@ -77,4 +78,10 @@ def apply(request):
 
 
 def login(request):
-	return render(request, 'login.html')
+#	if request.method == 'POST':
+	form = LoginForm()
+	return render(request, 'login.html', {'form':form})
+
+
+
+

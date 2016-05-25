@@ -8,4 +8,8 @@ class ApplyForm(forms.Form):
 	sgroup = forms.CharField(label='安全组', initial='生产组', max_length=30)
 	allowdb = forms.CharField(label='需要连接的rds', initial='xx.mysql.rds.aliyuncs.com', max_length=100)
 	name = forms.CharField(label='申请人', max_length=30)
+
+class LoginForm(forms.Form):
+	username = forms.CharField(max_length=30)
+	password = forms.CharField(max_length=100, widget=forms.PasswordInput())
 	

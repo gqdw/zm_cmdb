@@ -9,5 +9,6 @@ urlpatterns = [
 	url(r'^out/', views.output_data, name='output_data'),
 	url(r'^zabbix', views.ismonitor, name='ismonitor'),
 	url(r'^apply', views.apply, name='apply'),
+	url(r'^login', views.login, name='login'),
 
 ]
