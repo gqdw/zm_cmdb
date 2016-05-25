@@ -6,6 +6,7 @@ import csv
 from .zabbix import Zabbix
 from datetime import datetime
 from .forms import ApplyForm
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -63,6 +64,8 @@ def ismonitor(request):
 def apply(request):
 	if request.method == 'POST':
 		form = ApplyForm(request.POST)
+		send_mail('Subject here', 'Here is the message.', 'from@example.com',
+    ['aca_applet@163.com'], fail_silently=False)	
 		if form.is_valid():
 			return HttpResponse('ok')
 	else:
