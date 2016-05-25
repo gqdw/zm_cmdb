@@ -64,10 +64,13 @@ def ismonitor(request):
 def apply(request):
 	if request.method == 'POST':
 		form = ApplyForm(request.POST)
-		send_mail('Subject here', 'Here is the message.', 'from@example.com',
-    ['aca_applet@163.com'], fail_silently=False)	
 		if form.is_valid():
-			return HttpResponse('ok')
+			cd = form.cleaned_data
+			mtext = u'配置: %s \n台数:%d \n备注: %s \n安全组: %s\n需要连接的rds: %s\n申请人:%s ' % (cd['config'], 
+				cd['times'], cd['info'], cd['sgroup'], cd['allowdb'], cd['name'])
+			send_mail('apply resource', mtext, 'aca_jingru@qq.com',
+			    ['aca_applet@163.com'], fail_silently=False)	
+			return HttpResponse(u'<p>%s</p> <p>已发送</p>' % mtext)
 	else:
 		form = ApplyForm()
 	return render(request, 'apply.html', {'form':form})
