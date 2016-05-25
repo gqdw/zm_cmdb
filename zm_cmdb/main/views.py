@@ -66,11 +66,15 @@ def apply(request):
 		form = ApplyForm(request.POST)
 		if form.is_valid():
 			cd = form.cleaned_data
-			mtext = u'配置: %s \n台数:%d \n备注: %s \n安全组: %s\n需要连接的rds: %s\n申请人:%s ' % (cd['config'], 
+			mtext = u'配置: %s \n台数:%d \n用途: %s \n安全组: %s\n需要连接的rds: %s\n申请人:%s ' % (cd['config'], 
 				cd['times'], cd['info'], cd['sgroup'], cd['allowdb'], cd['name'])
 			send_mail('apply resource', mtext, 'aca_jingru@qq.com',
-			    ['aca_applet@163.com'], fail_silently=False)	
+			    ['monitor@zhai.me'], fail_silently=False)	
 			return HttpResponse(u'<p>%s</p> <p>已发送</p>' % mtext)
 	else:
 		form = ApplyForm()
 	return render(request, 'apply.html', {'form':form})
+
+
+def login(request):
+	return render(request, 'login.html')
