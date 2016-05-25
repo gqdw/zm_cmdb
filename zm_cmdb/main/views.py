@@ -7,7 +7,8 @@ from .zabbix import Zabbix
 from datetime import datetime
 from .forms import ApplyForm, LoginForm
 from django.core.mail import send_mail
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout, login
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -26,10 +27,12 @@ def index(request):
 	# return HttpResponse('Hello world!')
 	return render(request, 'index.html')
 
+@login_required(login_url='/main/login/')
 def list_host(request):
 	hosts = Host.objects.all()
 	return render(request, 'list.html', {'hosts':hosts} )
 
+@login_required(login_url='/main/login/')
 def output_data(request):
 	today = datetime.today()
 	filename = datetime.strftime(today,'%y%m%d')
@@ -62,6 +65,7 @@ def ismonitor(request):
 	return HttpResponseRedirect('/main/list/')
 	# return HttpResponse('zabbix status is ok')
 
+@login_required(login_url='/main/login/')
 def apply(request):
 	if request.method == 'POST':
 		form = ApplyForm(request.POST)
@@ -77,11 +81,28 @@ def apply(request):
 	return render(request, 'apply.html', {'form':form})
 
 
-def login(request):
-#	if request.method == 'POST':
-	form = LoginForm()
+def mylogin(request):
+	if request.method == 'POST':
+		form = LoginForm(request.POST)
+		if form.is_valid():
+			cd = form.cleaned_data
+#			print cd['username'], cd['password']
+			user = authenticate(username=cd['username'], password=cd['password'])
+			if user is not None:
+				if user.is_active:
+					print "user is valid, active and authenticated"
+					login(request, user)
+					return HttpResponse('<h3>登录成功</h3>')
+				else:
+					print "The password is valid, but the account has been disabled!"
+			else:
+				return HttpResponse('<h3>登录失败</h3>')
+	else:
+		form = LoginForm()	
 	return render(request, 'login.html', {'form':form})
 
-
+def mylogout(request):
+	logout(request)
+	return HttpResponse('<h3>logout success!</h3>')
 
 
