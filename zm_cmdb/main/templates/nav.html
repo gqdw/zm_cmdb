@@ -5,6 +5,6 @@
 {% if request.user.is_authenticated %}
   <li role="presentation"><a href="/main/logout">{{ request.user }} 已登录,登出请点击</a></li>
 {% else %}
-  <li role="presentation"><a href="/main/login">登录</a></li>
+  <li role="presentation"><a href="/main/login">未登录</a></li>
 {% endif %}
 </ul>
