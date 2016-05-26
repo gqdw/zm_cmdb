@@ -4,12 +4,9 @@
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
 
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="/main/list">机器列表</a></li>
-  <li role="presentation"><a href="/main/apply">申请机器</a></li>
-  <li role="presentation"><a href="/main/login">登录</a></li>
-</ul>
+<html>
+
+{% include "nav.html" %}
 
 <div class="container">
 <div class="jumbotron">
@@ -20,8 +17,9 @@
   <p><a class="btn btn-primary btn-lg" href="/main/apply" role="button">申请机器</a></p>
 </div>
 
-<h3>
 
 </div>
 
-</h3>
+
+</div>
+</html>
