@@ -92,7 +92,8 @@ def mylogin(request):
 				if user.is_active:
 					print "user is valid, active and authenticated"
 					login(request, user)
-					return HttpResponse('<h3>登录成功</h3>')
+#					return HttpResponse('<h3>登录成功</h3>')
+					return HttpResponseRedirect('/main')
 				else:
 					print "The password is valid, but the account has been disabled!"
 			else:
@@ -103,6 +104,6 @@ def mylogin(request):
 
 def mylogout(request):
 	logout(request)
-	return HttpResponse('<h3>logout success!</h3>')
+	return HttpResponseRedirect('/main')
 
 
