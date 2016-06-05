@@ -11,5 +11,6 @@ urlpatterns = [
 	url(r'^apply', views.apply, name='apply'),
 	url(r'^login', views.mylogin, name='mylogin'),
 	url(r'^logout', views.mylogout, name='mylogout'),
+	url(r'^getkeys', views.getkeys, name='getkeys'),
 
 ]

@@ -15,6 +15,18 @@
 <div class="panel-body">
 hello getkeys.html
 
+ {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+    <form action="" method="post" >
+        <table class="table table-condensed">
+            {{ form.as_table }}
+            {% csrf_token %}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </div>
 </html>

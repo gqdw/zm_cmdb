@@ -5,7 +5,7 @@ from .models import Host
 import csv
 from .zabbix import Zabbix
 from datetime import datetime
-from .forms import ApplyForm, LoginForm
+from .forms import ApplyForm, LoginForm, KeysForm
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
@@ -113,3 +113,14 @@ def mylogin(request):
 def mylogout(request):
 	logout(request)
 	return HttpResponseRedirect('/main')
+
+def getkeys(request):
+	if request.method == 'POST':
+		form = KeysForm(request.POST)
+		if form.is_valid():
+			cd = form.cleaned_data
+			hostname = cd['hostname']	
+			print hostname
+	else:
+		form = KeysForm()
+	return render(request, 'getkeys.html', {'form':form})
