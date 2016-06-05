@@ -15,3 +15,5 @@ class LoginForm(forms.Form):
 	username = forms.CharField(max_length=30)
 	password = forms.CharField(max_length=100, widget=forms.PasswordInput())
 	
+class KeysForm(forms.Form):
+	hostname = forms.CharField(max_length=30)
