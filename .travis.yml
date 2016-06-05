@@ -7,5 +7,5 @@ install: "pip install -r requirements.txt"
 # command to run tests
 #before_script:
 #  - "pep8 --ignore=E501, E225, src"
-script: find . -name \*.py |xargs pep8 --ignore=E402b, E501
+script: find . -name \*.py |xargs pep8 --ignore=E402b,E501
 # script: nosetests

@@ -20,34 +20,31 @@ class Zabbix():
 		self.times += 1
 		return res
 
-
 	def get_auth(self):
 		config = ConfigParser.ConfigParser()
 		config.read(os.path.expanduser('~/zabbix.cfg'))
 		user = config.get('main', 'user')
 		password = config.get('main', 'password')
-		a_data = {"jsonrpc":"2.0","method":"user.login","params":{"user":user, "password":password } ,"id":1}
+		a_data = {"jsonrpc": "2.0", "method": "user.login", "params": {"user": user, "password": password}, "id": 1}
 		# self.auth = requests.post(self.z_url, json=a_data).json()['result']
 		self.auth = self.commit(a_data)['result']
 
 	def get_hostip(self):
-		a_data = {
-    "jsonrpc": "2.0",
-    "method": "hostinterface.get",
-    "params": {
-        "output": "extend",
-        "filter": {
-         
-        }
-    },
-    "auth": self.auth,
-    "id": self.times
-}
+		a_data = {"jsonrpc": "2.0",
+				"method": "hostinterface.get",
+				"params": {
+					"output": "extend",
+					"filter": {}
+			    }, 
+				"auth": self.auth, 
+				"id": self.times
+				}
 		# res = requests.post(self.z_url, json=a_data)
 		res = self.commit(a_data)['result']
 		# print res.json()
 		for r in res:
 			self.hosts.append(r['ip'])
+
 
 def main():
 	Z = Zabbix()

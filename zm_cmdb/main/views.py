@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+
 def import_data(request):
 	with open('/Users/aca/Downloads/ecs_list0513.csv', 'rU') as csvfile:
 		reader = csv.reader(csvfile)
@@ -20,24 +21,28 @@ def import_data(request):
 			Host.objects.create_host(row[0], row[2], row[1])
 	return HttpResponse('ok')
 
+
 def reg(request):
 	return render(request, 'reg.html')
+
 
 def index(request):
 	# return HttpResponse('Hello world!')
 	return render(request, 'index.html')
 
+
 @login_required(login_url='/main/login/')
 def list_host(request):
 	hosts = Host.objects.all()
-	return render(request, 'list.html', {'hosts':hosts} )
+	return render(request, 'list.html', {'hosts': hosts})
+
 
 @login_required(login_url='/main/login/')
 def output_data(request):
 	today = datetime.today()
-	filename = datetime.strftime(today,'%y%m%d')
+	filename = datetime.strftime(today, '%y%m%d')
 	response = HttpResponse(content_type='text/csv')
-	response['Content-Disposition']  = 'attachment; filename="zm_hosts-%s.csv"' % (filename)
+	response['Content-Disposition'] = 'attachment; filename="zm_hosts-%s.csv"' % (filename)
 	writer = csv.writer(response)
 	writer.writerow(['hostname', 'eth0', 'eth1'])
 	for h in Host.objects.all():
@@ -46,8 +51,9 @@ def output_data(request):
 		alist.append(h.eth0)
 		alist.append(h.eth1)
 		writer.writerow(alist)
-#	writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
+# 	writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
 	return response
+
 
 def ismonitor(request):
 	Z = Zabbix()
@@ -55,15 +61,16 @@ def ismonitor(request):
 	Z.get_hostip()
 	hosts = Host.objects.all()
 	for h in hosts:
-	#	print h.eth0
+#  	print h.eth0
 		if h.eth0 in Z.hosts:
 			h.ismonitor = True
 			h.save()
 		else:
 			h.ismonitor = False
-#	print request.path
+# 	print request.path
 	return HttpResponseRedirect('/main/list/')
-	# return HttpResponse('zabbix status is ok')
+# 	 return HttpResponse('zabbix status is ok')
+
 
 @login_required(login_url='/main/login/')
 def apply(request):
@@ -71,14 +78,14 @@ def apply(request):
 		form = ApplyForm(request.POST)
 		if form.is_valid():
 			cd = form.cleaned_data
-			mtext = u'配置: %s \n台数:%d \n用途: %s \n安全组: %s\n需要连接的rds: %s\n申请人:%s ' % (cd['config'], 
-				cd['times'], cd['info'], cd['sgroup'], cd['allowdb'], cd['name'])
-			send_mail('apply resource', mtext, 'aca_jingru@qq.com',
-			    ['monitor@zhai.me'], fail_silently=False)	
+			mtext = u'配置: %s \n台数:%d \n用途: %s \n安全组: %s\n需要连接的rds: %s\n申请人:%s ' % (
+				cd['config'], cd['times'], cd['info'], cd['sgroup'], cd['allowdb'], cd['name'])
+			send_mail(
+				'apply resource', mtext, 'aca_jingru@qq.com', ['monitor@zhai.me'], fail_silently=False)
 			return HttpResponse(u'<p>%s</p> <p>已发送</p>' % mtext)
 	else:
 		form = ApplyForm()
-	return render(request, 'apply.html', {'form':form})
+	return render(request, 'apply.html', {'form': form})
 
 
 def mylogin(request):
@@ -86,13 +93,13 @@ def mylogin(request):
 		form = LoginForm(request.POST)
 		if form.is_valid():
 			cd = form.cleaned_data
-#			print cd['username'], cd['password']
+# 			print cd['username'], cd['password']
 			user = authenticate(username=cd['username'], password=cd['password'])
 			if user is not None:
 				if user.is_active:
 					print "user is valid, active and authenticated"
 					login(request, user)
-#					return HttpResponse('<h3>登录成功</h3>')
+# 					return HttpResponse('<h3>登录成功</h3>')
 					return HttpResponseRedirect('/main')
 				else:
 					print "The password is valid, but the account has been disabled!"
@@ -100,10 +107,9 @@ def mylogin(request):
 				return HttpResponse('<h3>登录失败</h3>')
 	else:
 		form = LoginForm()	
-	return render(request, 'login.html', {'form':form})
+	return render(request, 'login.html', {'form': form})
+
 
 def mylogout(request):
 	logout(request)
 	return HttpResponseRedirect('/main')
-
-
