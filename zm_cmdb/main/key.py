@@ -7,7 +7,7 @@ def get_keys(hostname, username='root'):
 	client = paramiko.SSHClient()
 	client.load_system_host_keys()
 	client.set_missing_host_key_policy(paramiko.client.WarningPolicy())
-	keyfile = '/Users/gqdw/Downloads/pkey/id_rsa'
+	keyfile = '/tmp/id_rsa'
 	client.connect(hostname, username=username, key_filename=keyfile)
 	cmd1 = 'cat /root/.ssh/authorized_keys'
 	# cmd1 = 'cat %s' % os.path.expanduser('~/.ssh/authorized_keys')
