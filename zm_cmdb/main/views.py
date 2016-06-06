@@ -9,6 +9,7 @@ from .forms import ApplyForm, LoginForm, KeysForm
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
+from key import get_keys
 
 # Create your views here.
 
@@ -120,7 +121,9 @@ def getkeys(request):
 		if form.is_valid():
 			cd = form.cleaned_data
 			hostname = cd['hostname']	
-			print hostname
+			keys = get_keys(hostname)
+			# return render(request, 'listkeys.html', {'keys':keys})
+			return render(request, 'getkeys.html', {'form':form, 'keys':keys})
 	else:
 		form = KeysForm()
 	return render(request, 'getkeys.html', {'form':form})
