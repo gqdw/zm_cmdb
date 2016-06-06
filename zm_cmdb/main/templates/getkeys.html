@@ -27,6 +27,17 @@ hello getkeys.html
         </table>
         <input type="submit" value="Submit">
     </form>
+
+    {% if keys %}
+        <table border="1" class="table table-condensed">
+    {% for key in keys %}
+        <tr>
+                <th>{{ key }} </th>
+        </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+
 </body>
 </div>
 </html>
