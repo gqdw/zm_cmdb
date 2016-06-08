@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Host
+from .models import Host, PublicKey
 # Register your models here.
 
 
@@ -10,3 +10,4 @@ class HostAdmin(admin.ModelAdmin):
 # 	fields = ('hostname', 'eth0', 'eth1')
 
 admin.site.register(Host, HostAdmin)
+admin.site.register(PublicKey)
