@@ -27,9 +27,14 @@ class Host(models.Model):
 # 	def create(cls, hostname, eth0, eth1):
 # 		host = cls(hostname=hostname, eth0=eth0, eth1=eth1)
 # 		return host
+class PublicKeyManager(models.Manager):
+	def create_key(self, key):
+		k = self.create(key=key)
+		return k
 
 class PublicKey(models.Model):
 	key = models.TextField(unique=True)
 
 	def __unicode__(self):
 		return self.key
+	objects = PublicKeyManager()
