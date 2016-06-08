@@ -123,7 +123,10 @@ def getkeys(request):
 			hostname = cd['hostname']	
 			keys = get_keys(hostname)
 			# return render(request, 'listkeys.html', {'keys':keys})
-			return render(request, 'getkeys.html', {'form':form, 'keys':keys})
+			if keys == '':
+				return render(request, 'getkeys.html', {'form':form, 'keys':keys, 'nokeys':1})
+			else:
+				return render(request, 'getkeys.html', {'form':form, 'keys':keys})
 	else:
 		form = KeysForm()
 	return render(request, 'getkeys.html', {'form':form})

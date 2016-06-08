@@ -27,6 +27,11 @@
         <input type="submit" value="Submit">
     </form>
 
+ {% if nokeys %}
+        <p style="color: red;">
+			no keys or cannot connect the host
+        </p>
+    {% endif %}
     {% if keys %}
         <table border="1" class="table table-condensed">
     {% for key in keys %}
