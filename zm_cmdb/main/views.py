@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Host
+from .models import Host, PublicKey
 import csv
 from .zabbix import Zabbix
 from datetime import datetime
@@ -126,6 +126,16 @@ def getkeys(request):
 			if keys == '':
 				return render(request, 'getkeys.html', {'form':form, 'keys':keys, 'nokeys':1})
 			else:
+				for k in keys:
+					p1 = PublicKey(key=k)
+					# if p1 in PublicKey.objects.all():
+					if PublicKey.objects.get(key=k):
+						print 'key exists'
+					else:
+						print 'add key'
+						p1.save()
+#						PublicKey.objects.create_key(key=k)
+
 				return render(request, 'getkeys.html', {'form':form, 'keys':keys})
 	else:
 		form = KeysForm()
