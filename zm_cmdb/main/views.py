@@ -127,14 +127,18 @@ def getkeys(request):
 				return render(request, 'getkeys.html', {'form':form, 'keys':keys, 'nokeys':1})
 			else:
 				for k in keys:
-					p1 = PublicKey(key=k)
+					# p1 = PublicKey(key=k)
 					# if p1 in PublicKey.objects.all():
-					if PublicKey.objects.get(key=k):
+					try:
+						pk = PublicKey.objects.get(key=k)
+					except Exception as e:
+						pk = None
+					if pk != None:
 						print 'key exists'
 					else:
 						print 'add key'
-						p1.save()
-#						PublicKey.objects.create_key(key=k)
+						PublicKey.objects.create_key(key=k)
+					#	p1.save()
 
 				return render(request, 'getkeys.html', {'form':form, 'keys':keys})
 	else:
