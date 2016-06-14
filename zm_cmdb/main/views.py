@@ -117,6 +117,7 @@ def mylogout(request):
 
 def getkeys(request):
 	if request.method == 'POST':
+		updatekey()
 		form = KeysForm(request.POST)
 		if form.is_valid():
 			cd = form.cleaned_data
@@ -144,6 +145,11 @@ def getkeys(request):
 	else:
 		form = KeysForm()
 	return render(request, 'getkeys.html', {'form':form})
+
+def updatekey():
+	for k in PublicKey.objects.all():
+		if k.key != '':
+			k.key_shortname = k.key.split()[-1]
 
 def keylist(request):
 	keys = PublicKey.objects.all()
