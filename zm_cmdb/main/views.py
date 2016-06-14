@@ -150,6 +150,7 @@ def updatekey():
 	for k in PublicKey.objects.all():
 		if k.key != '':
 			k.key_shortname = k.key.split()[-1]
+			k.save()
 
 def keylist(request):
 	keys = PublicKey.objects.all()
