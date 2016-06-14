@@ -144,3 +144,7 @@ def getkeys(request):
 	else:
 		form = KeysForm()
 	return render(request, 'getkeys.html', {'form':form})
+
+def keylist(request):
+	keys = PublicKey.objects.all()
+	return render(request, 'keylist.html', {'keys':keys})

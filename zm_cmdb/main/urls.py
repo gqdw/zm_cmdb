@@ -12,5 +12,6 @@ urlpatterns = [
 	url(r'^login', views.mylogin, name='mylogin'),
 	url(r'^logout', views.mylogout, name='mylogout'),
 	url(r'^getkeys', views.getkeys, name='getkeys'),
+	url(r'^keylist', views.keylist, name='keylist'),
 
 ]

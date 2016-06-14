@@ -1,0 +1,33 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+<html>
+
+{% include "nav.html" %}
+
+<body>
+
+<div class="container">
+<div class="panel panel-default">
+<div class="panel-heading">Host List</div>
+<div class="panel-body">
+	<p>there are {{ keys|length }} keys in cmdb </p>
+</div>
+<table border="1" class="table table-condensed">
+<tr>
+<th>keys</th>
+<th>eth0</th>
+
+</tr>
+{% for k in keys %}
+        <tr>
+                <th>{{ k }} </th>
+        </tr>
+{% endfor %}
+</table>
+
+</body>
+</div>
+</html>
