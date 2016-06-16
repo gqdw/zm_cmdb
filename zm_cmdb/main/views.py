@@ -117,7 +117,7 @@ def mylogout(request):
 
 def getkeys(request):
 	if request.method == 'POST':
-		updatekey()
+#		updatekey()
 		form = KeysForm(request.POST)
 		if form.is_valid():
 			cd = form.cleaned_data
@@ -138,7 +138,7 @@ def getkeys(request):
 						print 'key exists'
 					else:
 						print 'add key'
-						PublicKey.objects.create_key(key=k)
+						PublicKey.objects.create_key(key=k, key_shortname=k.split()[-1])
 					#	p1.save()
 
 				return render(request, 'getkeys.html', {'form':form, 'keys':keys})
