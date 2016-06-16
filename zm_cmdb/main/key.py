@@ -14,7 +14,7 @@ def get_keys(hostname, username='root'):
 		# cmd1 = 'cat %s' % os.path.expanduser('~/.ssh/authorized_keys')
 		print cmd1
 		stdin, stdout, stderr = client.exec_command(cmd1)
-		keys = stdout.read().split('\n')
+		keys = stdout.read().strip().split('\n')
 	# except paramiko.ssh_exception.SSHException:
 	except Exception, e:
 		print e
