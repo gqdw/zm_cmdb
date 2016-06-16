@@ -37,5 +37,5 @@ class PublicKey(models.Model):
 	key_shortname = models.TextField(unique=True, null=True)
 
 	def __unicode__(self):
-		return self.key
+		return self.key_shortname
 	objects = PublicKeyManager()
