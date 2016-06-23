@@ -18,12 +18,14 @@
 <table border="1" class="table table-condensed">
 <tr>
 <th>key shortname</th>
+<th>key info</th>
 <th>key</th>
 
 </tr>
 {% for k in keys %}
         <tr>
                 <th>{{ k.key_shortname }} </th>
+                <th>{{ k.key_info }} </th>
                 <th>{{ k.key }} </th>
         </tr>
 {% endfor %}
