@@ -18,6 +18,10 @@ class Host(models.Model):
 	# eth0 = models.GenericIPAddressField(unique=True)
 	eth1 = models.GenericIPAddressField(unique=True, blank=True, null=True)
 	ismonitor = models.BooleanField(default=False)
+	cpu = models.IntegerField(blank=True, null=True)
+	mem = models.IntegerField(blank=True, null=True)
+	disknum = models.IntegerField(blank=True, null=True)
+	
 
 	def __unicode__(self):
 		return self.hostname
