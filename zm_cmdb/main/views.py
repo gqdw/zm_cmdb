@@ -55,6 +55,18 @@ def output_data(request):
 # 	writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
 	return response
 
+@login_required(login_url='/main/login/')
+def output_data_txt(request):
+	today = datetime.today()
+	filename = datetime.strftime(today, '%y%m%d')
+	hosts = Host.objects.all()
+	response = HttpResponse(content_type='text/plain')
+	response['Content-Disposition'] = 'attachment; filename="eth1-%s.txt"' % (filename)
+	for h in hosts:
+		if h.eth1:
+			response.write((h.eth1)+'\n')
+	return response
+
 
 def ismonitor(request):
 	Z = Zabbix()
