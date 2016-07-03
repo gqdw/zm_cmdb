@@ -15,5 +15,6 @@ urlpatterns = [
 	url(r'^keylist', views.keylist, name='keylist'),
 	# url(r'^gethosteth1', views.keylist),
 	url(r'^gethosteth1', views.gethosteth1, name='gethosteth1'),
+	url(r'^gethosteth0', views.gethosteth0, name='gethosteth0'),
 
 ]

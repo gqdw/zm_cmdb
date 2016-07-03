@@ -163,3 +163,11 @@ def gethosteth1(request):
 	hosts = Host.objects.all()
 # 	return render(request, 'gethosteth1.html', {'hosts':hosts})
 	return render(request, 'api/gethosteth1.html', {'hosts':hosts})
+
+def gethosteth0(request):
+	"""
+	return hosts eth1 list
+	"""
+	hosts = Host.objects.all()
+# 	return render(request, 'gethosteth1.html', {'hosts':hosts})
+	return render(request, 'api/gethosteth0.html', {'hosts':hosts})
