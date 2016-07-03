@@ -155,3 +155,11 @@ def updatekey():
 def keylist(request):
 	keys = PublicKey.objects.all()
 	return render(request, 'keylist.html', {'keys':keys})
+
+def gethosteth1(request):
+	"""
+	return hosts eth1 list
+	"""
+	hosts = Host.objects.all()
+# 	return render(request, 'gethosteth1.html', {'hosts':hosts})
+	return render(request, 'api/gethosteth1.html', {'hosts':hosts})

@@ -13,5 +13,7 @@ urlpatterns = [
 	url(r'^logout', views.mylogout, name='mylogout'),
 	url(r'^getkeys', views.getkeys, name='getkeys'),
 	url(r'^keylist', views.keylist, name='keylist'),
+	# url(r'^gethosteth1', views.keylist),
+	url(r'^gethosteth1', views.gethosteth1, name='gethosteth1'),
 
 ]
