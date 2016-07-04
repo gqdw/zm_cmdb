@@ -168,6 +168,7 @@ def keylist(request):
 	keys = PublicKey.objects.all()
 	return render(request, 'keylist.html', {'keys':keys})
 
+@login_required(login_url='/main/login/')
 def gethosteth1(request):
 	"""
 	return hosts eth1 list
@@ -176,6 +177,7 @@ def gethosteth1(request):
 # 	return render(request, 'gethosteth1.html', {'hosts':hosts})
 	return render(request, 'api/gethosteth1.html', {'hosts':hosts})
 
+@login_required(login_url='/main/login/')
 def gethosteth0(request):
 	"""
 	return hosts eth1 list
