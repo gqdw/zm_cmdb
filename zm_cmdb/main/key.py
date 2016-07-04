@@ -1,7 +1,8 @@
 import os
 import logging
 import paramiko
-#import socket
+# import socket
+
 
 def get_keys(hostname, username='root'):
 	try:
@@ -25,6 +26,5 @@ def get_keys(hostname, username='root'):
 
 if __name__ == '__main__':
 	keys = get_keys('114.55.72.105')
-	#keys = get_keys('121.40.76.26')
+# 	keys = get_keys('121.40.76.26')
 	print keys
-
