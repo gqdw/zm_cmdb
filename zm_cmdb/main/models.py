@@ -21,11 +21,12 @@ class Host(models.Model):
 	cpu = models.IntegerField(blank=True, null=True)
 	mem = models.IntegerField(blank=True, null=True)
 	disknum = models.IntegerField(blank=True, null=True)
-	
+
 
 	def __unicode__(self):
 		return self.hostname
 	objects = HostManager()
+
 
 # 	@classmethod
 # 	def create(cls, hostname, eth0, eth1):
@@ -35,6 +36,7 @@ class PublicKeyManager(models.Manager):
 	def create_key(self, key, key_shortname):
 		k = self.create(key=key, key_shortname=key_shortname)
 		return k
+
 
 class PublicKey(models.Model):
 	key = models.TextField(unique=True)

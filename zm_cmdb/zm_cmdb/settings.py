@@ -132,4 +132,3 @@ EMAIL_HOST_USER = config.get('mail', 'user')
 EMAIL_HOST_PASSWORD = config.get('mail', 'password')
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-
