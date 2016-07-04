@@ -55,6 +55,7 @@ def output_data(request):
 # 	writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
 	return response
 
+
 @login_required(login_url='/main/login/')
 def output_data_txt(request):
 	today = datetime.today()
@@ -64,7 +65,7 @@ def output_data_txt(request):
 	response['Content-Disposition'] = 'attachment; filename="eth1-%s.txt"' % (filename)
 	for h in hosts:
 		if h.eth1:
-			response.write((h.eth1)+'\n')
+			response.write(h.eth1 + '\n')
 	return response
 
 
@@ -74,7 +75,6 @@ def ismonitor(request):
 	Z.get_hostip()
 	hosts = Host.objects.all()
 	for h in hosts:
-#  	print h.eth0
 		if h.eth0 in Z.hosts:
 			h.ismonitor = True
 			h.save()
@@ -119,7 +119,7 @@ def mylogin(request):
 			else:
 				return HttpResponse('<h3>登录失败</h3>')
 	else:
-		form = LoginForm()	
+		form = LoginForm()
 	return render(request, 'login.html', {'form': form})
 
 
@@ -127,17 +127,17 @@ def mylogout(request):
 	logout(request)
 	return HttpResponseRedirect('/main')
 
+
 def getkeys(request):
 	if request.method == 'POST':
-#		updatekey()
 		form = KeysForm(request.POST)
 		if form.is_valid():
 			cd = form.cleaned_data
-			hostname = cd['hostname']	
+			hostname = cd['hostname']
 			keys = get_keys(hostname)
 			# return render(request, 'listkeys.html', {'keys':keys})
 			if keys == '':
-				return render(request, 'getkeys.html', {'form':form, 'keys':keys, 'nokeys':1})
+				return render(request, 'getkeys.html', {'form': form, 'keys': keys, 'nokeys': 1})
 			else:
 				for k in keys:
 					# p1 = PublicKey(key=k)
@@ -146,17 +146,17 @@ def getkeys(request):
 						pk = PublicKey.objects.get(key=k)
 					except Exception as e:
 						pk = None
-					if pk != None:
+					if pk is not None:
 						print 'key exists'
 					else:
 						print 'add key'
 						PublicKey.objects.create_key(key=k, key_shortname=k.split()[-1])
-					#	p1.save()
 
-				return render(request, 'getkeys.html', {'form':form, 'keys':keys})
+				return render(request, 'getkeys.html', {'form': form, 'keys': keys})
 	else:
 		form = KeysForm()
-	return render(request, 'getkeys.html', {'form':form})
+	return render(request, 'getkeys.html', {'form': form})
+
 
 def updatekey():
 	for k in PublicKey.objects.all():
@@ -164,9 +164,11 @@ def updatekey():
 			k.key_shortname = k.key.split()[-1]
 			k.save()
 
+
 def keylist(request):
 	keys = PublicKey.objects.all()
-	return render(request, 'keylist.html', {'keys':keys})
+	return render(request, 'keylist.html', {'keys': keys})
+
 
 @login_required(login_url='/main/login/')
 def gethosteth1(request):
@@ -174,8 +176,9 @@ def gethosteth1(request):
 	return hosts eth1 list
 	"""
 	hosts = Host.objects.all()
-# 	return render(request, 'gethosteth1.html', {'hosts':hosts})
-	return render(request, 'api/gethosteth1.html', {'hosts':hosts})
+# 	return render(request, 'gethosteth1.html', {'hosts': hosts})
+	return render(request, 'api/gethosteth1.html', {'hosts': hosts})
+
 
 @login_required(login_url='/main/login/')
 def gethosteth0(request):
@@ -183,5 +186,5 @@ def gethosteth0(request):
 	return hosts eth1 list
 	"""
 	hosts = Host.objects.all()
-# 	return render(request, 'gethosteth1.html', {'hosts':hosts})
-	return render(request, 'api/gethosteth0.html', {'hosts':hosts})
+# 	return render(request, 'gethosteth1.html', {'hosts': hosts})
+	return render(request, 'api/gethosteth0.html', {'hosts': hosts})

@@ -30,15 +30,16 @@ class Zabbix():
 		self.auth = self.commit(a_data)['result']
 
 	def get_hostip(self):
-		a_data = {"jsonrpc": "2.0",
-				"method": "hostinterface.get",
-				"params": {
-					"output": "extend",
-					"filter": {}
-			    }, 
-				"auth": self.auth, 
-				"id": self.times
-				}
+		a_data = {
+			"jsonrpc": "2.0",
+			"method": "hostinterface.get",
+			"params": {
+				"output": "extend",
+				"filter": {}
+			},
+			"auth": self.auth,
+			"id": self.times
+		}
 		# res = requests.post(self.z_url, json=a_data)
 		res = self.commit(a_data)['result']
 		# print res.json()

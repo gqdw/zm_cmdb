@@ -22,7 +22,6 @@ class Host(models.Model):
 	mem = models.IntegerField(blank=True, null=True)
 	disknum = models.IntegerField(blank=True, null=True)
 
-
 	def __unicode__(self):
 		return self.hostname
 	objects = HostManager()

@@ -8,5 +8,6 @@ install: "pip install -r requirements.txt"
 #before_script:
 #  - "pep8 --ignore=E501, E225, src"
 # E101 indentation contains mixed spaces and tabs
-script: find . -name \*.py |xargs pep8 --ignore=E402b,E501,W191,E101
+# E126 continuation line over-indented for hanging indent
+script: find . -name \*.py |xargs pep8 --ignore=E402b,E501,W191,E101,E126
 # script: nosetests
