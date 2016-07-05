@@ -3,13 +3,14 @@ import logging
 import paramiko
 # import socket
 
+
 def execmd(hostname, username, cmd):
 	try:
 		client = paramiko.SSHClient()
 		client.load_system_host_keys()
-		client.set_missing_host_key_policy(paramiko.client.WarningPolicy()    )
+		client.set_missing_host_key_policy(paramiko.client.WarningPolicy())
 		keyfile = '/tmp/id_rsa'
-		client.connect(hostname, username=username, key_filename=keyfile,     timeout=5)
+		client.connect(hostname, username=username, key_filename=keyfile, timeout=5)
 		stdin, stdout, stderr = client.exec_command(cmd)
 	except Exception, e:
 		print e
@@ -18,7 +19,7 @@ def execmd(hostname, username, cmd):
 
 def get_keys(hostname, username='root'):
 	cmd = 'cat /root/.ssh/authorized_keys'
-	res = execmd('114.55.72.105', 'root', cmd)	
+	res = execmd('114.55.72.105', 'root', cmd)
 	return res.strip().split('\n')
 
 
