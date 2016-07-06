@@ -20,6 +20,9 @@
 <th>hostname</th>
 <th>eth0</th>
 <th>eth1</th>
+<th>cpu核数</th>
+<th>内存(kB)</th>
+<th>磁盘数</th>
 </tr>
 {% for host in hosts %}
 {% if host.ismonitor %}
@@ -27,12 +30,18 @@
                 <th>{{ host.hostname }} </th>
                 <th>{{ host.eth0 }} </th>
                 <th>{{ host.eth1 }} </th>
+				<th>{{ host.cpu }} </th>
+                <th>{{ host.mem }} </th>
+                <th>{{ host.disknum }} </th>
         </tr>
 {% else %}
         <tr>
                 <th>{{ host.hostname }} </th>
                 <th>{{ host.eth0 }} </th>
                 <th>{{ host.eth1 }} </th>
+                <th>{{ host.cpu }} </th>
+                <th>{{ host.mem }} </th>
+                <th>{{ host.disknum }} </th>
         </tr>
 {% endif %}
 {% endfor %}
