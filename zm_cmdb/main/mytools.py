@@ -43,7 +43,17 @@ def get_mem_info(hostname, username='root'):
 	return m.group(0)
 
 
+def get_disk_info(hostname, username='root'):
+	"""
+	get disk num form /dev/vdb+ or /dev/xvdb+
+	"""
+	cmd = 'if [ -e /dev/vda ]; then ls /dev/vd[b-z]|wc -l;else ls /dev/xvd[b-z]|wc -l ;fi;'
+	res = execmd(hostname, username, cmd)
+	return 1 + int(res)
+
+
 if __name__ == '__main__':
 	print get_keys('114.55.72.105')
 	print get_cpu_info('114.55.72.105')
 	print get_mem_info('114.55.72.105')
+	print get_disk_info('114.55.72.105')
