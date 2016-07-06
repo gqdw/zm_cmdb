@@ -9,7 +9,7 @@ from .forms import ApplyForm, LoginForm, KeysForm
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
-from mytools import get_keys
+from mytools import get_keys, get_cpu_info, get_mem_info, get_disk_info
 
 # Create your views here.
 
@@ -163,6 +163,24 @@ def updatekey():
 		if k.key != '':
 			k.key_shortname = k.key.split()[-1]
 			k.save()
+
+
+def update_info(request):
+	"""
+	update cup,mem,disk info
+	"""
+	for h in Host.objects.all():
+		try:
+			cpu = get_cpu_info(h.eth1)
+			mem = get_mem_info(h.eth1)
+			disk = get_disk_info(h.eth1)
+			h.cpu = cpu
+			h.mem = mem
+			h.disknum = disk
+			h.save()
+		except Exception as e:
+			print e
+	return HttpResponse('ok')
 
 
 def keylist(request):
