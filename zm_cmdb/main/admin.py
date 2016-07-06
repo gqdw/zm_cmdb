@@ -4,7 +4,7 @@ from .models import Host, PublicKey
 
 
 class HostAdmin(admin.ModelAdmin):
-	list_display = ('hostname', 'eth0', 'eth1')
+	list_display = ('hostname', 'eth0', 'eth1', 'cpu', 'mem', 'disknum')
 	search_fields = ('hostname', 'eth0', 'eth1')
 # list_filter = ('hostname',)
 # 	fields = ('hostname', 'eth0', 'eth1')
