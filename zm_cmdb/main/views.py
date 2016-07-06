@@ -9,7 +9,7 @@ from .forms import ApplyForm, LoginForm, KeysForm
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
-from key import get_keys
+from mytools import get_keys
 
 # Create your views here.
 
