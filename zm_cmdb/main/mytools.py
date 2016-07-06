@@ -19,10 +19,11 @@ def execmd(hostname, username, cmd):
 
 def get_keys(hostname, username='root'):
 	cmd = 'cat /root/.ssh/authorized_keys'
-	res = execmd('114.55.72.105', 'root', cmd)
+	res = execmd('114.55.72.105', username, cmd)
 	return res.strip().split('\n')
 
 
+# def get_cpu_info(hostname, username
 if __name__ == '__main__':
 	keys = get_keys('114.55.72.105')
 # 	keys = get_keys('121.40.76.26')
