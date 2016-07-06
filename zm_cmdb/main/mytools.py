@@ -1,6 +1,7 @@
 import os
 import logging
 import paramiko
+import re
 # import socket
 
 
@@ -19,13 +20,30 @@ def execmd(hostname, username, cmd):
 
 def get_keys(hostname, username='root'):
 	cmd = 'cat /root/.ssh/authorized_keys'
-	res = execmd('114.55.72.105', username, cmd)
+	res = execmd(hostname, username, cmd)
 	return res.strip().split('\n')
 
 
-# def get_cpu_info(hostname, username
+def get_cpu_info(hostname, username='root'):
+	"""
+	return cpu nums
+	"""
+	cmd = 'nproc'
+	res = execmd(hostname, username, cmd)
+	return res
+
+
+def get_mem_info(hostname, username='root'):
+	"""
+	return memory in kB
+	"""
+	cmd = 'grep MemTotal /proc/meminfo'
+	res = execmd(hostname, username, cmd)
+	m = re.search(r'(\d+)', res)
+	return m.group(0)
+
+
 if __name__ == '__main__':
-	keys = get_keys('114.55.72.105')
-# 	keys = get_keys('121.40.76.26')
-	print execmd('114.55.72.105', 'root', 'ls /tmp')
-	print keys
+	print get_keys('114.55.72.105')
+	print get_cpu_info('114.55.72.105')
+	print get_mem_info('114.55.72.105')
