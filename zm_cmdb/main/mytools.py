@@ -11,7 +11,7 @@ def execmd(hostname, username, cmd):
 		client.load_system_host_keys()
 		client.set_missing_host_key_policy(paramiko.client.WarningPolicy())
 		keyfile = '/tmp/id_rsa'
-		client.connect(hostname, username=username, key_filename=keyfile, timeout=5)
+		client.connect(hostname, username=username, key_filename=keyfile, timeout=3)
 		stdin, stdout, stderr = client.exec_command(cmd)
 	except Exception, e:
 		print e

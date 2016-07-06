@@ -158,15 +158,14 @@ def getkeys(request):
 	return render(request, 'getkeys.html', {'form': form})
 
 
-def updatekey(request):
+def updatekey():
 	for k in PublicKey.objects.all():
 		if k.key != '':
 			k.key_shortname = k.key.split()[-1]
 			k.save()
 
 
-@login_required(login_url='/main/login/')
-def update_info(request):
+def update_info():
 	"""
 	update cup,mem,disk info
 	"""
@@ -181,7 +180,7 @@ def update_info(request):
 			h.save()
 		except Exception as e:
 			print e
-	return HttpResponse('ok')
+# 	return HttpResponse('ok')
 
 
 def keylist(request):
