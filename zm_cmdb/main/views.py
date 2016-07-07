@@ -69,6 +69,19 @@ def output_data_txt(request):
 	return response
 
 
+@login_required(login_url='/main/login/')
+def output_data_txt_eth0(request):
+	today = datetime.today()
+	filename = datetime.strftime(today, '%y%m%d')
+	hosts = Host.objects.all()
+	response = HttpResponse(content_type='text/plain')
+	response['Content-Disposition'] = 'attachment; filename="eth0-%s.txt"' % (filename)
+	for h in hosts:
+		if h.eth0:
+			response.write(h.eth0 + '\n')
+	return response
+
+
 def ismonitor(request):
 	Z = Zabbix()
 	Z.get_auth()

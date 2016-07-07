@@ -15,7 +15,8 @@ urlpatterns = [
 	# url(r'^gethosteth1', views.keylist),
 	url(r'^gethosteth1', views.gethosteth1, name='gethosteth1'),
 	url(r'^gethosteth0', views.gethosteth0, name='gethosteth0'),
-	url(r'^output_data_txt', views.output_data_txt, name='output_data_txt'),
+	url(r'^output_data_txt$', views.output_data_txt, name='output_data_txt'),
+	url(r'^output_data_txt_eth0$', views.output_data_txt_eth0, name='output_data_txt_eth0'),
 	url(r'^update_info', views.update_info, name='update_info'),
 
 ]
