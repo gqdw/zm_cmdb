@@ -11,7 +11,7 @@
 
 <div class="container">
 <div class="panel panel-default">
-<div class="panel-heading">Host List</div>
+<div class="panel-heading">Key List</div>
 <div class="panel-body">
 	<p>there are {{ keys|length }} keys in cmdb </p>
 </div>
@@ -30,7 +30,7 @@
         </tr>
 {% endfor %}
 </table>
-
 </body>
 </div>
+<p><a class="btn btn-primary btn-lg" href="/admin/main/publickey/add/" role="button">add key</a></p>
 </html>
