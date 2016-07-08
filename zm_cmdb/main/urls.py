@@ -18,5 +18,6 @@ urlpatterns = [
 	url(r'^output_data_txt$', views.output_data_txt, name='output_data_txt'),
 	url(r'^output_data_txt_eth0$', views.output_data_txt_eth0, name='output_data_txt_eth0'),
 	url(r'^update_info', views.update_info, name='update_info'),
+	url(r'^jtest$', views.jtest, name='jtest'),
 
 ]

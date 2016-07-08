@@ -219,3 +219,10 @@ def gethosteth0(request):
 	hosts = Host.objects.all()
 # 	return render(request, 'gethosteth1.html', {'hosts': hosts})
 	return render(request, 'api/gethosteth0.html', {'hosts': hosts})
+
+
+def jtest(request):
+	"""
+	just test jquery
+	"""
+	return render(request, 'jtest.html')
