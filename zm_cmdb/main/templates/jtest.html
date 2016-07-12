@@ -9,9 +9,26 @@
     <script src="/static/admin/js/jquery.js"></script>
     <script>
  
-	eval("alert(\"Message\")");
+//	eval("alert(\"Message\")");
     // Your code goes here.
+function moveon() {
+// Display a modal dialog to ask the user a question
+var answer = confirm("Ready to move on?");
+// If they clicked the "OK" button, make the browser load a new page
+if (answer) window.location = "http://google.com";
+}
+// Run the function defined above 1 minute (60,000 milliseconds) from now.
+setTimeout(moveon, 60000);
  
     </script>
+	<button onClick="alert('You clicked the button using Javascript.');">
+       Click Me - I run Javascript
+	</button>
+	<button id="about-btn"> Click Me - I'm Javascript on Speed</button>
+
+<p>This is a example</p>
+
+<p>This is another example</p>
+
 </body>
 </html>
