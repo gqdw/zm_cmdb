@@ -1,2 +1,5 @@
 django
 pep8
+django-bootstrap3
+requests
+paramiko
