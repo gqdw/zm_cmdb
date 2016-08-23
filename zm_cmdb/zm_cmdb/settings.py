@@ -126,7 +126,7 @@ STATIC_ROOT = './static'
 
 # mail
 config = ConfigParser.ConfigParser()
-config.read(os.path.expanduser('~/mail.cfg'))
+config.read(os.path.expanduser('~/.mail.cfg'))
 EMAIL_HOST = config.get('mail', 'host')
 EMAIL_HOST_USER = config.get('mail', 'user')
 EMAIL_HOST_PASSWORD = config.get('mail', 'password')
