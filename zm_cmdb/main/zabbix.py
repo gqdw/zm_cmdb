@@ -2,6 +2,7 @@ import requests
 import json
 import ConfigParser
 import os
+import sys
 
 
 # headers = {'Content-Type': 'application/json-rpc'}
@@ -21,13 +22,18 @@ class Zabbix():
 		return res
 
 	def get_auth(self):
-		config = ConfigParser.ConfigParser()
-		config.read(os.path.expanduser('~/zabbix.cfg'))
-		user = config.get('main', 'user')
-		password = config.get('main', 'password')
-		a_data = {"jsonrpc": "2.0", "method": "user.login", "params": {"user": user, "password": password}, "id": 1}
-		# self.auth = requests.post(self.z_url, json=a_data).json()['result']
-		self.auth = self.commit(a_data)['result']
+		try:
+			config = ConfigParser.ConfigParser()
+			config.read(os.path.expanduser('~/zabbix.cfg'))
+			user = config.get('main', 'user')
+			password = config.get('main', 'password')
+			a_data = {"jsonrpc": "2.0", "method": "user.login", "params": {"user": user, "password": password}, "id": 1}
+			# self.auth = requests.post(self.z_url, json=a_data).json()['result']
+			self.auth = self.commit(a_data)['result']
+		except Exception as e:
+			print 'cannot get auth' 
+			print e
+			sys.exit(1)
 
 	def get_hostip(self):
 		a_data = {
