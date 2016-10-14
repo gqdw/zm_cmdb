@@ -19,7 +19,7 @@ def import_data(request):
 		reader = csv.reader(csvfile)
 		for row in reader:
 			# print row[0]
-			Host.objects.create_host(row[0], row[3], row[2])
+			Host.objects.create_host(row[0], row[3], row[2], row[4], row[5])
 	return HttpResponse('ok')
 
 
