@@ -6,8 +6,8 @@ from django.db import models
 
 
 class HostManager(models.Manager):
-	def create_host(self, hostname, eth0, eth1):
-		host = self.create(hostname=hostname, eth0=eth0, eth1=eth1)
+	def create_host(self, hostname, eth0, eth1, cpu=0, mem=0, disknum=0):
+		host = self.create(hostname=hostname, eth0=eth0, eth1=eth1, cpu=cpu, mem=mem, disknum=disknum)
 		return host
 
 
