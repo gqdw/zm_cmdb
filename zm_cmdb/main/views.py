@@ -15,11 +15,11 @@ from mytools import get_keys, get_cpu_info, get_mem_info, get_disk_info
 
 
 def import_data(request):
-	with open('/Users/aca/Downloads/ecs_list0513.csv', 'rU') as csvfile:
+	with open('/Users/gqdw/Downloads/ecs-10-14-2.csv', 'rU') as csvfile:
 		reader = csv.reader(csvfile)
 		for row in reader:
 			# print row[0]
-			Host.objects.create_host(row[0], row[2], row[1])
+			Host.objects.create_host(row[0], row[3], row[2])
 	return HttpResponse('ok')
 
 
