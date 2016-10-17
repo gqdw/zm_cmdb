@@ -31,7 +31,7 @@ class Zabbix():
 			# self.auth = requests.post(self.z_url, json=a_data).json()['result']
 			self.auth = self.commit(a_data)['result']
 		except Exception as e:
-			print 'cannot get auth' 
+			print 'cannot get auth'
 			print e
 			sys.exit(1)
 
