@@ -1,8 +1,9 @@
-#coding=utf-8
+# coding=utf-8
 from models import aliHost
 from aliyunsdkcore import client
 import json
-
+import ConfigParser
+import os
 from aliyunsdkecs.request.v20140526 import DescribeRegionsRequest
 from aliyunsdkecs.request.v20140526 import DescribeInstancesRequest
 
@@ -27,6 +28,8 @@ from aliyunsdkecs.request.v20140526 import DescribeInstancesRequest
                     ]
                 },
 '''
+
+
 class Host:
 	def __init__(self):
 		self.RegionId = ''
@@ -39,15 +42,25 @@ class Host:
 		self.Memory = None
 		self.InnerIpAddress = ''
 		self.DeviceAvailable = None
+
 	def __unicode__(self):
 		return u'Name: %s\t %s\t %s' % (self.InstanceName, self.PublicIpAddress, self.InnerIpAddress)
+
 	def __repr__(self):
-		return 'Name: %s\t %s\t %s'  % (self.InstanceName, self.PublicIpAddress, self.InnerIpAddress)
+		return 'Name: %s\t %s\t %s' % (self.InstanceName, self.PublicIpAddress, self.InnerIpAddress)
 
 
 class Aliyun:
 	def __init__(self):
-		self.clt = client.AcsClient('JS8KEnbwp1i09DkL','Pau4aDtqAEqedEWQRJcs8rIPI4Wzoi','cn-hangzhou')
+		try:
+			config = ConfigParser.ConfigParser()
+			config.read(os.path.expanduser('~/.aliyun.cfg'))
+			accessid = config.get('main', 'id')
+			key = config.get('main', 'key')
+		except Exception as e:
+			print 'cannot read ~/.aliyun.cfg'
+			raise
+		self.clt = client.AcsClient(accessid, key, 'cn-hangzhou')
 		self.totalcount = 0
 		self.hosts = []
 
@@ -75,7 +88,6 @@ class Aliyun:
 				Memory = d.get('Memory')
 				DeviceAvailable = d.get('DeviceAvailable')
 				IoOptimized = d.get('IoOptimized')
-#				h.publicipaddress = d.get('PublicIpAddress').get
 				aliHost.objects.create_host(InstanceName, PublicIpAddress, InnerIpAddress, IoOptimized, Cpu, Memory, DeviceAvailable, ZoneId)
 				print InstanceName
 				# self.hosts.append(h)

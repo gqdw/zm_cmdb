@@ -26,10 +26,12 @@ class Host(models.Model):
 		return self.hostname
 	objects = HostManager()
 
+
 class aliHostManager(models.Manager):
 	def create_host(self, InstanceName, PublicIpAddress, InnerIpAddress, IoOptimized, Cpu, Memory, DeviceAvailable, ZoneId):
 		host = self.create(InstanceName=InstanceName, PublicIpAddress=PublicIpAddress, InnerIpAddress=InnerIpAddress, IoOptimized=IoOptimized, Cpu=Cpu, Memory=Memory, DeviceAvailable=DeviceAvailable, ZoneId=ZoneId)
 		return host
+
 
 class aliHost(models.Model):
 	InstanceName = models.CharField(unique=True, max_length=50)
@@ -44,13 +46,8 @@ class aliHost(models.Model):
 	def __unicode__(self):
 		return self.InstanceName
 	objects = aliHostManager()
-	
 
 
-# 	@classmethod
-# 	def create(cls, hostname, eth0, eth1):
-# 		host = cls(hostname=hostname, eth0=eth0, eth1=eth1)
-# 		return host
 class PublicKeyManager(models.Manager):
 	def create_key(self, key, key_shortname):
 		k = self.create(key=key, key_shortname=key_shortname)
