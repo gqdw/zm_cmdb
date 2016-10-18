@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Host, PublicKey
+from .models import Host, PublicKey, aliHost
 import csv
 from .zabbix import Zabbix
 from datetime import datetime
@@ -36,6 +36,12 @@ def index(request):
 def list_host(request):
 	hosts = Host.objects.all()
 	return render(request, 'list.html', {'hosts': hosts})
+
+
+@login_required(login_url='/main/login/')
+def alilist_host(request):
+	hosts = aliHost.objects.all()
+	return render(request, 'alilist.html', {'hosts': hosts})
 
 
 @login_required(login_url='/main/login/')

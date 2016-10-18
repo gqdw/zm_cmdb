@@ -1,0 +1,42 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+<html>
+
+{% include "nav.html" %}
+
+<body>
+
+<div class="container">
+<div class="panel panel-default">
+<div class="panel-heading">阿里云主机列表</div>
+<div class="panel-body">
+	<p>there are {{ hosts|length }} hosts in cmdb </p>
+	<p>今天是:  {% now "jS \o\f F" %}</p>
+</div>
+<table border="1" class="table table-condensed">
+<tr>
+<th>实例名</th>
+<th>公网ip</th>
+<th>内网ip</th>
+<th>cpu核数</th>
+<th>内存(m)</th>
+<th>可用区</th>
+</tr>
+{% for host in hosts %}
+        <tr>
+                <th>{{ host.InstanceName }} </th>
+                <th>{{ host.PublicIpAddress }} </th>
+                <th>{{ host.InnerIpAddress }} </th>
+                <th>{{ host.Cpu }} </th>
+                <th>{{ host.Memory }} </th>
+                <th>{{ host.ZoneId }} </th>
+        </tr>
+{% endfor %}
+</table>
+
+</body>
+</div>
+</html>
