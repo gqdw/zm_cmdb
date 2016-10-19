@@ -42,6 +42,7 @@ class aliHost(models.Model):
 	Memory = models.IntegerField()
 	DeviceAvailable = models.BooleanField()
 	ZoneId = models.CharField(max_length=30)
+	info = models.CharField(max_length=100, null=True)
 
 	def __unicode__(self):
 		return self.InstanceName

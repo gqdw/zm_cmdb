@@ -24,6 +24,7 @@
 <th>cpu核数</th>
 <th>内存(m)</th>
 <th>可用区</th>
+<th>备注</th>
 </tr>
 {% for host in hosts %}
         <tr>
@@ -33,6 +34,7 @@
                 <th>{{ host.Cpu }} </th>
                 <th>{{ host.Memory }} </th>
                 <th>{{ host.ZoneId }} </th>
+                <th>{{ host.info }} </th>
         </tr>
 {% endfor %}
 </table>
