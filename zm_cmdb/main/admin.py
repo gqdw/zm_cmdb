@@ -9,6 +9,12 @@ class HostAdmin(admin.ModelAdmin):
 # list_filter = ('hostname',)
 # 	fields = ('hostname', 'eth0', 'eth1')
 
+
+class aliHostAdmin(admin.ModelAdmin):
+	list_display = ('InstanceName', 'InnerIpAddress', 'PublicIpAddress', 'info')
+	search_fields = ('InstanceName', 'InnerIpAddress', 'PublicIpAddress', 'info')
+
+
 admin.site.register(Host, HostAdmin)
 admin.site.register(PublicKey)
-admin.site.register(aliHost)
+admin.site.register(aliHost, aliHostAdmin)
